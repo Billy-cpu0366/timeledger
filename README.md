@@ -1,3 +1,9 @@
+> **本仓库是 fork**
+> 
+> 基于 [Razeeman/Android-SimpleTimeTracker](https://github.com/Razeeman/Android-SimpleTimeTracker)（GPLv3）改造。
+> 改造目标：说一句话 → AI 整理成带起止时间的记录 → 一天画成色块。
+> 详细设计见 [PROJECT.md](PROJECT.md)。
+
 <h1 align="center">
     <img src="metadata/en-US/images/icon_round.png" alt="icon" height="128" width="128"/>
     <br>
