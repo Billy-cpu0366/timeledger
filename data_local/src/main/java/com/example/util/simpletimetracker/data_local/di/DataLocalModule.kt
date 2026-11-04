@@ -25,6 +25,7 @@ import com.example.util.simpletimetracker.data_local.recordType.RecordTypeGoalDa
 import com.example.util.simpletimetracker.data_local.recordTag.RecordTypeToDefaultTagDao
 import com.example.util.simpletimetracker.data_local.recordTag.RecordTypeToTagDao
 import com.example.util.simpletimetracker.data_local.record.RunningRecordDao
+import com.example.util.simpletimetracker.data_local.recordExtra.RecordExtraDao
 import com.example.util.simpletimetracker.data_local.recordShortcut.RecordShortcutDao
 import com.example.util.simpletimetracker.data_local.recordTag.RecordShortcutToRecordTagDao
 import com.example.util.simpletimetracker.data_local.recordTag.RunningRecordToRecordTagDao
@@ -209,5 +210,11 @@ class DataLocalModule {
     @Singleton
     fun getActivityReminderOverrideDao(database: AppDatabase): ActivityReminderOverrideDao {
         return database.activityReminderOverrideDao()
+    }
+
+    @Provides
+    @Singleton
+    fun getRecordExtraDao(database: AppDatabase): RecordExtraDao {
+        return database.recordExtraDao()
     }
 }

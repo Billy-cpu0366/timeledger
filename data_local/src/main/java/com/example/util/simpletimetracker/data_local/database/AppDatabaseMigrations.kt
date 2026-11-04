@@ -48,6 +48,7 @@ class AppDatabaseMigrations {
                 migration_37_38,
                 migration_38_39,
                 migration_39_40,
+                migration_40_41,
             )
 
         private val migration_1_2 = object : Migration(1, 2) {
@@ -511,6 +512,14 @@ class AppDatabaseMigrations {
                 )
                 database.execSQL(
                     "ALTER TABLE recordTypes ADD COLUMN gradient_angle INTEGER",
+                )
+            }
+        }
+
+        private val migration_40_41 = object : Migration(40, 41) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `recordExtras` (`record_id` INTEGER NOT NULL, `raw_text` TEXT NOT NULL, PRIMARY KEY(`record_id`), FOREIGN KEY(`record_id`) REFERENCES `records`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
                 )
             }
         }
