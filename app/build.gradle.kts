@@ -98,6 +98,7 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":data_local"))
+    implementation(project(":data_ai"))
     implementation(project(":resources"))
     implementation(project(":feature_capture"))
     implementation(project(":feature_main"))
