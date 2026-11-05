@@ -13,6 +13,7 @@ import com.example.util.simpletimetracker.domain.parser.ApiKeyRepo
 import com.example.util.simpletimetracker.domain.pending.model.PendingRecord
 import com.example.util.simpletimetracker.domain.pending.model.PendingRecordStatus
 import com.example.util.simpletimetracker.domain.pending.repo.PendingRecordRepo
+import com.example.util.simpletimetracker.domain.seed.CategorySeeder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +36,9 @@ class CaptureActivity : AppCompatActivity() {
 
     @Inject
     lateinit var apiKeyRepo: ApiKeyRepo
+
+    @Inject
+    lateinit var categorySeeder: CategorySeeder
 
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
@@ -100,6 +104,8 @@ class CaptureActivity : AppCompatActivity() {
         root.addView(saveButton)
 
         setContentView(root)
+
+        scope.launch { categorySeeder.ensure() }
     }
 
     private fun save(rawText: String) {
