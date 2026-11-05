@@ -24,6 +24,7 @@ import com.example.util.simpletimetracker.data_local.recordType.RecordTypeDao
 import com.example.util.simpletimetracker.data_local.recordType.RecordTypeGoalDao
 import com.example.util.simpletimetracker.data_local.recordTag.RecordTypeToDefaultTagDao
 import com.example.util.simpletimetracker.data_local.recordTag.RecordTypeToTagDao
+import com.example.util.simpletimetracker.data_local.pending.PendingRecordDao
 import com.example.util.simpletimetracker.data_local.record.RunningRecordDao
 import com.example.util.simpletimetracker.data_local.recordExtra.RecordExtraDao
 import com.example.util.simpletimetracker.data_local.recordShortcut.RecordShortcutDao
@@ -216,5 +217,11 @@ class DataLocalModule {
     @Singleton
     fun getRecordExtraDao(database: AppDatabase): RecordExtraDao {
         return database.recordExtraDao()
+    }
+
+    @Provides
+    @Singleton
+    fun getPendingRecordDao(database: AppDatabase): PendingRecordDao {
+        return database.pendingRecordDao()
     }
 }

@@ -8,14 +8,30 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.util.simpletimetracker.domain.pending.model.PendingRecord
+import com.example.util.simpletimetracker.domain.pending.model.PendingRecordStatus
+import com.example.util.simpletimetracker.domain.pending.repo.PendingRecordRepo
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * 「记一笔」输入界面。
  *
- * 只负责收集一段文字并触发保存动作，不关心文字是打字来的还是输入法语音来的，
- * 也不做解析。落库在 T1-4 接入。
+ * 只负责收集一段文字并**先落库**，不关心文字是打字来的还是输入法语音来的，
+ * 也不做解析。任何网络请求都必须发生在这之后。
  */
+@AndroidEntryPoint
 class CaptureActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var pendingRecordRepo: PendingRecordRepo
+
+    private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     private lateinit var input: EditText
 
@@ -47,9 +63,7 @@ class CaptureActivity : AppCompatActivity() {
                 if (text.isEmpty()) {
                     Toast.makeText(this@CaptureActivity, "没有内容", Toast.LENGTH_SHORT).show()
                 } else {
-                    // T1-4 会替换为落库
-                    Toast.makeText(this@CaptureActivity, "收到：$text", Toast.LENGTH_LONG).show()
-                    input.text?.clear()
+                    save(text)
                 }
             }
         }
@@ -66,5 +80,24 @@ class CaptureActivity : AppCompatActivity() {
         root.addView(saveButton)
 
         setContentView(root)
+    }
+
+    private fun save(rawText: String) {
+        scope.launch {
+            pendingRecordRepo.add(
+                PendingRecord(
+                    rawText = rawText,
+                    status = PendingRecordStatus.PENDING,
+                    createdAt = System.currentTimeMillis(),
+                ),
+            )
+            Toast.makeText(this@CaptureActivity, "已记录", Toast.LENGTH_SHORT).show()
+            input.text?.clear()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel()
     }
 }

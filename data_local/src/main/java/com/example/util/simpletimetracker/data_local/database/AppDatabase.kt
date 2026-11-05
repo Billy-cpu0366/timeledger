@@ -31,6 +31,8 @@ import com.example.util.simpletimetracker.data_local.recordExtra.RecordExtraDBO
 import com.example.util.simpletimetracker.data_local.recordExtra.RecordExtraDao
 import com.example.util.simpletimetracker.data_local.record.RunningRecordDBO
 import com.example.util.simpletimetracker.data_local.record.RunningRecordDao
+import com.example.util.simpletimetracker.data_local.pending.PendingRecordDBO
+import com.example.util.simpletimetracker.data_local.pending.PendingRecordDao
 import com.example.util.simpletimetracker.data_local.recordShortcut.RecordShortcutDBO
 import com.example.util.simpletimetracker.data_local.recordShortcut.RecordShortcutDao
 import com.example.util.simpletimetracker.data_local.recordTag.RecordShortcutToRecordTagDBO
@@ -83,8 +85,9 @@ import com.example.util.simpletimetracker.data_local.scheduledReminder.Scheduled
         ActivityReminderOverrideDBO::class,
         ActivityReminderRuleDBO::class,
         RecordExtraDBO::class,
+        PendingRecordDBO::class,
     ],
-    version = 41,
+    version = 42,
     exportSchema = true,
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -138,6 +141,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun activityReminderOverrideDao(): ActivityReminderOverrideDao
 
     abstract fun recordExtraDao(): RecordExtraDao
+
+    abstract fun pendingRecordDao(): PendingRecordDao
 
     companion object {
         const val DATABASE_NAME = "simpleTimeTrackerDB"

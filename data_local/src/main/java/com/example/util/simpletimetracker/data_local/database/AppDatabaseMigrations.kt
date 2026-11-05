@@ -49,6 +49,7 @@ class AppDatabaseMigrations {
                 migration_38_39,
                 migration_39_40,
                 migration_40_41,
+                migration_41_42,
             )
 
         private val migration_1_2 = object : Migration(1, 2) {
@@ -520,6 +521,14 @@ class AppDatabaseMigrations {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL(
                     "CREATE TABLE IF NOT EXISTS `recordExtras` (`record_id` INTEGER NOT NULL, `raw_text` TEXT NOT NULL, PRIMARY KEY(`record_id`), FOREIGN KEY(`record_id`) REFERENCES `records`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+                )
+            }
+        }
+
+        private val migration_41_42 = object : Migration(41, 42) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `pendingRecords` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `raw_text` TEXT NOT NULL, `status` INTEGER NOT NULL, `created_at` INTEGER NOT NULL)",
                 )
             }
         }
