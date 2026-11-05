@@ -13,6 +13,7 @@ import com.example.util.simpletimetracker.data_local.favourite.RecordTypeToFavou
 import com.example.util.simpletimetracker.data_local.prefs.PrefsRepoImpl
 import com.example.util.simpletimetracker.data_local.apiKey.ApiKeyRepoImpl
 import com.example.util.simpletimetracker.data_local.pending.PendingRecordRepoImpl
+import com.example.util.simpletimetracker.data_local.recordExtra.RecordExtraRepoImpl
 import com.example.util.simpletimetracker.data_local.record.RecordRepoImpl
 import com.example.util.simpletimetracker.data_local.record.RunningRecordRepoImpl
 import com.example.util.simpletimetracker.data_local.recordTag.RecordTagRepoImpl
@@ -60,6 +61,7 @@ import com.example.util.simpletimetracker.domain.recordTag.repo.RecordShortcutTo
 import com.example.util.simpletimetracker.domain.recordsFilter.repo.FavouriteRecordsFilterRepo
 import com.example.util.simpletimetracker.domain.sharing.SharingRepo
 import com.example.util.simpletimetracker.domain.parser.ApiKeyRepo
+import com.example.util.simpletimetracker.domain.recordExtra.RecordExtraRepo
 import com.example.util.simpletimetracker.domain.pending.repo.PendingRecordRepo
 import com.example.util.simpletimetracker.domain.scheduledReminder.repo.ScheduledReminderRepo
 import dagger.Binds
@@ -91,6 +93,10 @@ interface DataLocalModuleBinds {
     @Binds
     @Singleton
     fun bindApiKeyRepo(impl: ApiKeyRepoImpl): ApiKeyRepo
+
+    @Binds
+    @Singleton
+    fun bindRecordExtraRepo(impl: RecordExtraRepoImpl): RecordExtraRepo
 
     @Binds
     @Singleton
