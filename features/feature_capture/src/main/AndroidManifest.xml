@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+
+        <activity
+            android:name="com.example.util.simpletimetracker.feature_capture.view.CaptureActivity"
+            android:exported="true"
+            android:label="记一笔"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
+
+    </application>
+
+</manifest>
