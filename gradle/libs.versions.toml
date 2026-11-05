@@ -1,6 +1,7 @@
 [versions]
 gradle = "8.10.1"
 kotlin = "1.9.25"
+okhttp = "4.12.0"
 ktlint = "12.1.0"
 ksp = "1.9.25-1.0.20" # same as kotlin
 marathon = "0.10.3"
@@ -52,6 +53,7 @@ coroutinesTest = "1.7.1"
 rules = "1.5.0"
 
 [libraries]
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 javax = { group = "javax.inject", name = "javax.inject", version.ref = "javax" }
